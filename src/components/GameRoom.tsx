@@ -267,7 +267,7 @@ const GameRoom = () => {
           />
         ))}
         
-        {/* Character */}
+        {/* Character - 방향과 움직임 상태를 전달해줍니다 */}
         <Character 
           position={characterPosition} 
           direction={direction}
