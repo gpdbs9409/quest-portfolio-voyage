@@ -17,33 +17,20 @@ const Character = ({ position }: CharacterProps) => {
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,
-        width: '40px',
-        height: '40px',
+        width: '32px',
+        height: '48px',
+        imageRendering: 'pixelated',
       }}
     >
-      {/* Character Sprite - Pixel Art Style */}
+      {/* Pixel Art Character */}
       <div className="w-full h-full relative">
-        {/* Shadow */}
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-8 h-2 bg-black bg-opacity-20 rounded-full" />
-        
-        {/* Character Body */}
-        <div className="w-full h-full flex flex-col items-center justify-end">
-          {/* Head */}
-          <div className="w-6 h-6 bg-amber-600 border-2 border-amber-800 rounded-full mb-1" />
-          
-          {/* Body */}
-          <div className="w-5 h-4 bg-blue-600 border-2 border-blue-800 rounded-sm" />
-          
-          {/* Legs */}
-          <div className="flex gap-1">
-            <div className="w-1 h-3 bg-gray-700 rounded-sm" />
-            <div className="w-1 h-3 bg-gray-700 rounded-sm" />
-          </div>
-        </div>
-        
-        {/* Floating indicator */}
-        <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 text-yellow-500 animate-bounce">
-          ⭐
+        {/* Character Sprite - Simple pixel art style */}
+        <div 
+          className="w-full h-full bg-no-repeat bg-contain"
+          style={{
+            backgroundImage: `url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAsElEQVR4Ae3WIQzCQBCF4UUggUAiQCKRCCQSiUQikUgkAoFAIpE3wLJ/u3NTmobc5H3JF9fdvN5Md5gF/5c38ILjD6YHRmSMmNsQJ1xxwA4rnLDFwIboKjziFg4ecLiPJVa44hh6M7zgvptwFzu0mEtvgitzfHnCFar4HXeoguPYt1CFauXzFakViVdl8k9JvCzFB0P8NIufZyoi4tFUPByriKwnxCPCD0e5d595AQ76dfPxkXxqAAAAAElFTkSuQmCC")`,
+          }}
+        >
         </div>
       </div>
     </div>

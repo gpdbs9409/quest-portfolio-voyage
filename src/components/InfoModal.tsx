@@ -20,20 +20,22 @@ interface InfoModalProps {
 }
 
 const InfoModal = ({ object, onClose }: InfoModalProps) => {
-  const getObjectIcon = (id: string) => {
+  const getObjectImage = (id: string) => {
     switch (id) {
       case 'bed':
-        return '🛏️';
+        return `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAsklEQVR4Ae2WwQ2DMBAEpeQKUkIqoARKoIRUkA6cEtIBJVBCOkhJlDB6WMEhQeCLLrav9ow0vrw2xjTqglR6vIdEnDqgTqgEi0/fZ3xJAPTBCPjKCFwW0PcZbwLYD3m1gL7P+CCgBdpOvk9AC3yAlwT0UYyA6p8CkgAJkAAJkICUgGNvTTj6iVty9pK8Id8IyzYCJOAIsJTqX8J+D6kqEMlVa5WAJCBXOq3+b0+QPpJTmPADHCvyKTdR9JIAAAAASUVORK5CYII=`;
       case 'bookshelf':
-        return '📚';
+        return `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6EAAAAp0lEQVR4Ae3ZsQ2DMBCG0ePShSkYIRsxQkZghGyATAD7ABNkMUIMZzu0Kd0UcXPVf9JXnAtu7jQc7gAuQDngkJDjItYLcMt64r1OUw44Y7kD+4zFAAAAAAAAAP+FAe+lfwDjOuCOpQ44J+S4iLVecNiA5YP/9RlxrRMa0FfQlxDTg7TGTQ2ocWsD1jjqBkcNiDvQl+fXuo8aECsmuhfjnFD1SciA6gu4A9PcG8zfoanCAAAAAElFTkSuQmCC`;
       case 'computer':
-        return '🖥️';
+        return `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA4ElEQVR4Ae2WQQ6CMBBFZ+IKXMOVx8AVXHkM9Bh6DPQYuDJexzW48Bi44DP5idHEBGiZ4qbMSxoKTf95mWlhABDAA1gAB9VxAPQVZw+sAaQMzLtcBtxkIBLAgY6pKHFbA38z8GPP3VtbIENXQw/4omt7+xuNrk8NeIqtpK6xnhrr69izFdS4HhpwFTuVYL133YJ3HRemWPXWgJPYYeL6FkAJXtLNNQvELGbhoZdVA1ERxaCZXYRZNo38J+B7IkRCJKCpkLwFHnICa+hwY1AaqAG/JRHE0CkfA38fqhLs3dMJzLEVkOSUhCUAAAAASUVORK5CYII=`;
       case 'printer':
-        return '🖨️';
+        return `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAVUlEQVR4Ae3TMQoAIAiFYTtXdzF38BqeoyvYETqETCJuu4T/gQ8UfSo9InIAMzuAiEQHgDmA3VNI0gBs/QawXQB2nFMAakXf7IB0qVbIEpfKEvDGA3wZc1WIj7KpaQAAAABJRU5ErkJggg==`;
       case 'door':
-        return '🚪';
+        return `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAgCAYAAADNLCKpAAAAZElEQVR4Ae3SMQoAIQxE0Ym9nkcTvJZX9CKWFoIIu2jjFoLFm5CPIXXkh6q6CXpEXEQ+EuQZwDXK+p9hZgGeblUQCbIpqNvMUt1MXvvQzPLbzOx7gF5AbwG9BfQW0FtAb2E+oxQR3HrhE9UAAAAASUVORK5CYII=`;
+      case 'table':
+        return `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAU0lEQVR4Ae3WMQoAIAxDUa/g6F08nkdwdBeurjq4iH+BMoRHSAepIlJVRyAzu8EpJtbYthY4YsutuQF+B/A7gN8B/A7gd+DTdyA6wPABFnABYeAGPhWyMPxIJlEAAAAASUVORK5CYII=`;
       default:
-        return '❓';
+        return `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAVElEQVR4Ae3WwQkAIAiFYRfqxm3cEdzGGTpCN7AR7BCCgX3wP1AQPnvqiEgTkXLPzAwNUFXz1bEXGNaZWt85YMCAAQMGDBgw8McAW7+CvgP4HTjxzAaOzj0xIwGJYAAAAABJRU5ErkJggg==`;
     }
   };
 
@@ -47,36 +49,43 @@ const InfoModal = ({ object, onClose }: InfoModalProps) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-2xl max-w-md w-full transform animate-scale-in border-4 border-amber-200">
+    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
+      <div 
+        className="bg-black text-white max-w-md w-full border-4 border-white transform animate-scale-in"
+        style={{ imageRendering: 'pixelated' }}
+      >
         {/* Header */}
-        <div className="bg-gradient-to-r from-amber-200 to-amber-300 px-6 py-4 rounded-t-lg border-b-4 border-amber-400">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="text-3xl">{getObjectIcon(object.id)}</span>
-              <h2 className="text-xl font-bold text-amber-900 font-mono">
-                {object.content.title}
-              </h2>
+        <div className="bg-gray-900 px-4 py-3 border-b-4 border-white flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8">
+              <img 
+                src={getObjectImage(object.id)} 
+                alt={object.name}
+                className="w-full h-full"
+              />
             </div>
-            <button
-              onClick={onClose}
-              className="text-amber-700 hover:text-amber-900 transition-colors p-1 rounded-full hover:bg-amber-100"
-            >
-              <X size={24} />
-            </button>
+            <h2 className="text-xl font-bold text-white font-mono">
+              {object.content.title}
+            </h2>
           </div>
+          <button
+            onClick={onClose}
+            className="text-white hover:text-gray-300 transition-colors p-1"
+          >
+            <X size={24} />
+          </button>
         </div>
         
         {/* Content */}
-        <div className="p-6">
-          <p className="text-gray-700 leading-relaxed mb-6 font-mono text-sm">
+        <div className="p-4">
+          <p className="text-white leading-relaxed mb-6 font-mono text-sm">
             {object.content.description}
           </p>
           
           {/* Links */}
           {object.content.links && object.content.links.length > 0 && (
             <div className="space-y-3">
-              <h3 className="font-semibold text-gray-800 font-mono text-sm border-b-2 border-amber-200 pb-1">
+              <h3 className="font-semibold text-white font-mono text-sm border-b-2 border-gray-700 pb-1">
                 🔗 바로가기
               </h3>
               <div className="space-y-2">
@@ -84,7 +93,7 @@ const InfoModal = ({ object, onClose }: InfoModalProps) => {
                   <button
                     key={index}
                     onClick={() => handleLinkClick(link.url)}
-                    className="w-full text-left bg-gradient-to-r from-amber-100 to-amber-200 hover:from-amber-200 hover:to-amber-300 px-4 py-3 rounded-lg border-2 border-amber-300 transition-all duration-200 hover:shadow-md font-mono text-sm text-amber-900 hover:text-amber-800"
+                    className="w-full text-left bg-gray-900 hover:bg-gray-800 px-4 py-2 border-2 border-white font-mono text-sm text-white"
                   >
                     📄 {link.text}
                   </button>
@@ -95,8 +104,8 @@ const InfoModal = ({ object, onClose }: InfoModalProps) => {
         </div>
         
         {/* Footer */}
-        <div className="bg-amber-50 px-6 py-3 rounded-b-lg border-t-2 border-amber-200">
-          <p className="text-xs text-amber-600 font-mono text-center">
+        <div className="bg-gray-900 px-4 py-2 border-t-2 border-white">
+          <p className="text-xs text-gray-400 font-mono text-center">
             ESC 키 또는 X 버튼으로 닫기
           </p>
         </div>
