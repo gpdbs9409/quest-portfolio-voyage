@@ -24,7 +24,10 @@ interface RoomObjectData {
 const GameRoom = () => {
   const [characterPosition, setCharacterPosition] = useState<Position>({ x: 240, y: 200 });
   const [selectedObject, setSelectedObject] = useState<RoomObjectData | null>(null);
+  const [direction, setDirection] = useState<'up' | 'down' | 'left' | 'right'>('down');
+  const [isMoving, setIsMoving] = useState<boolean>(false);
   const gameAreaRef = useRef<HTMLDivElement>(null);
+  const keysPressed = useRef<Set<string>>(new Set());
   
   const roomObjects: RoomObjectData[] = [
     {
@@ -102,6 +105,30 @@ const GameRoom = () => {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      keysPressed.current.add(e.key.toLowerCase());
+      setIsMoving(true);
+    };
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      keysPressed.current.delete(e.key.toLowerCase());
+      if (keysPressed.current.size === 0) {
+        setIsMoving(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
+
+  // 캐릭터 움직임 및 방향 처리
+  useEffect(() => {
+    const moveCharacter = () => {
+      if (keysPressed.current.size === 0) return;
+      
       const speed = 6;
       const gameArea = gameAreaRef.current;
       if (!gameArea) return;
@@ -113,37 +140,43 @@ const GameRoom = () => {
       setCharacterPosition(prev => {
         let newX = prev.x;
         let newY = prev.y;
+        let newDirection = direction;
 
-        switch (e.key) {
-          case 'ArrowUp':
-          case 'w':
-          case 'W':
-            newY = Math.max(0, prev.y - speed);
-            break;
-          case 'ArrowDown':
-          case 's':
-          case 'S':
-            newY = Math.min(maxY, prev.y + speed);
-            break;
-          case 'ArrowLeft':
-          case 'a':
-          case 'A':
-            newX = Math.max(0, prev.x - speed);
-            break;
-          case 'ArrowRight':
-          case 'd':
-          case 'D':
-            newX = Math.min(maxX, prev.x + speed);
-            break;
+        // 위/아래 움직임
+        if (keysPressed.current.has('w') || keysPressed.current.has('arrowup')) {
+          newY = Math.max(0, prev.y - speed);
+          newDirection = 'up';
+        } else if (keysPressed.current.has('s') || keysPressed.current.has('arrowdown')) {
+          newY = Math.min(maxY, prev.y + speed);
+          newDirection = 'down';
+        }
+
+        // 좌/우 움직임 (위/아래 움직임보다 우선시)
+        if (keysPressed.current.has('a') || keysPressed.current.has('arrowleft')) {
+          newX = Math.max(0, prev.x - speed);
+          newDirection = 'left';
+        } else if (keysPressed.current.has('d') || keysPressed.current.has('arrowright')) {
+          newX = Math.min(maxX, prev.x + speed);
+          newDirection = 'right';
+        }
+
+        // 방향 업데이트
+        if (newDirection !== direction) {
+          setDirection(newDirection);
         }
 
         return { x: newX, y: newY };
       });
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+    // 애니메이션 프레임 요청
+    const animationFrameId = requestAnimationFrame(function animate() {
+      moveCharacter();
+      requestAnimationFrame(animate);
+    });
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [direction]);
 
   const handleObjectClick = (object: RoomObjectData) => {
     setSelectedObject(object);
@@ -235,7 +268,11 @@ const GameRoom = () => {
         ))}
         
         {/* Character */}
-        <Character position={characterPosition} />
+        <Character 
+          position={characterPosition} 
+          direction={direction}
+          isMoving={isMoving}
+        />
         
         {/* Instructions */}
         <div className="absolute top-4 left-4 bg-black bg-opacity-70 text-white p-3 rounded-none border-2 border-white font-mono text-xs" style={{imageRendering: 'pixelated'}}>
