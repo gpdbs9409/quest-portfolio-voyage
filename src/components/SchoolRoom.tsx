@@ -28,7 +28,18 @@ const SchoolRoom = () => {
   const gameAreaRef = useRef<HTMLDivElement>(null);
   const keysPressed = useRef<Set<string>>(new Set());
   
-  const roomObjects: RoomObjectData[] = [];
+  const roomObjects: RoomObjectData[] = [
+    {
+      id: 'nodejs',
+      name: 'Test Object',
+      position: { x: 200, y: 150 },
+      size: { width: 64, height: 64 },
+      content: {
+        title: '',
+        description: ''
+      }
+    }
+  ];
 
   // 캐릭터 이미지 경로 반환 함수
   const getCharacterSrc = () => `/assets/character_${direction}.png`;
