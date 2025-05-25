@@ -20,8 +20,8 @@ interface RoomObjectData {
   };
 }
 
-const HKRoom = () => {
-  const [characterPosition, setCharacterPosition] = useState<Position>({ x: 240, y: 240 });
+const ShinhanRoom = () => {
+  const [characterPosition, setCharacterPosition] = useState<Position>({ x: 240, y: 200 });
   const [selectedObject, setSelectedObject] = useState<RoomObjectData | null>(null);
   const [direction, setDirection] = useState<'up' | 'down' | 'left' | 'right'>('down');
   const [isMoving, setIsMoving] = useState<boolean>(false);
@@ -95,6 +95,7 @@ const HKRoom = () => {
   const handleObjectClick = (object: RoomObjectData) => {
     setSelectedObject(object);
   };
+
   const closeModal = () => {
     setSelectedObject(null);
   };
@@ -133,23 +134,21 @@ const HKRoom = () => {
   };
 
   return (
-    <div className="w-full h-screen bg-black flex flex-col">
-      {/* 상단 UI (Game.tsx 스타일) */}
-      <div className="w-full px-4 pt-4 pb-2 flex justify-between items-start">
-        <div className="bg-black bg-opacity-70 text-white border-2 border-white px-3 py-2 font-mono text-xs" style={{ imageRendering: 'pixelated' }}>
-          <div>🎮 WASD 또는 화살표 키로 이동</div>
-          <div>🏠 건물 접근 시 입장</div>
-        </div>
-        <div className="text-right">
-          <h1 className="text-2xl font-bold text-white font-mono px-2 py-1 bg-black border-2 border-white">Hackers</h1>
-          <p className="text-white font-mono bg-black px-2 border-2 border-t-0 border-white text-xs">서비스 기획 인턴</p>
-        </div>
-      </div>
-      {/* 중앙 512x512 박스 */}
-      <div className="flex-1 flex items-center justify-center">
+    <div className="w-full h-screen bg-black relative overflow-hidden font-mono">
+      <div 
+        ref={gameAreaRef}
+        className="w-full h-full relative"
+      >
         {generateFloorTiles()}
+        <div className="absolute top-4 left-4 bg-black bg-opacity-70 text-white p-3 rounded-none border-2 border-white font-mono text-xs" style={{imageRendering: 'pixelated'}}>
+          <div>🎮 WASD 또는 화살표 키로 이동</div>
+          <div>🖱️ 오브젝트 클릭으로 상호작용</div>
+        </div>
+        <div className="absolute top-4 right-4 text-right">
+          <h1 className="text-2xl font-bold text-white font-mono px-2 py-1 bg-black border-2 border-white">Shinhan</h1>
+          <p className="text-white text-s font-mono bg-black px-2 border-2 border-t-0 border-white">프로 디지털 아카데미</p>
+        </div>
       </div>
-      {/* Info Modal */}
       {selectedObject && (
         <InfoModal object={selectedObject} onClose={closeModal} />
       )}
@@ -157,6 +156,4 @@ const HKRoom = () => {
   );
 };
 
-export default HKRoom;
-  
-  
+export default ShinhanRoom; 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 interface Position {
   x: number;
@@ -6,71 +6,38 @@ interface Position {
 }
 
 interface CharacterProps {
-  gameWidth: number;
-  gameHeight: number;
+  position: Position;
+  direction: 'up' | 'down' | 'left' | 'right';
+  isMoving: boolean;
+  src?: string;
 }
 
-const CHARACTER_SIZE = 50;
+const CHARACTER_WIDTH = 32;
+// const CHARACTER_HEIGHT = 48; // 높이 자동 비율 유지 위해 주석처리
 
-const Character: React.FC<CharacterProps> = ({ gameWidth, gameHeight }) => {
-  const [position, setPosition] = useState<Position>({
-    x: (gameWidth - CHARACTER_SIZE) / 2,
-    y: (gameHeight - CHARACTER_SIZE) / 2
-  });
-  const [direction, setDirection] = useState<string>('/assets/character_down.png');
-  const moveSpeed = 10;
+const directionToImage: Record<string, string> = {
+  up: '/assets/character_up.png',
+  down: '/assets/character_down.png',
+  left: '/assets/character_left.png',
+  right: '/assets/character_right.png',
+};
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      const key = e.key.toLowerCase();
-      let newPosition = { ...position };
-      let newDirection = direction;
-
-      switch (key) {
-        case 'w':
-        case 'arrowup':
-          newPosition.y = Math.max(0, position.y - moveSpeed);
-          newDirection = '/assets/character_up.png';
-          break;
-        case 's':
-        case 'arrowdown':
-          newPosition.y = Math.min(gameHeight - CHARACTER_SIZE, position.y + moveSpeed);
-          newDirection = '/assets/character_down.png';
-          break;
-        case 'a':
-        case 'arrowleft':
-          newPosition.x = Math.max(0, position.x - moveSpeed);
-          newDirection = '/assets/character_left.png';
-          break;
-        case 'd':
-        case 'arrowright':
-          newPosition.x = Math.min(gameWidth - CHARACTER_SIZE, position.x + moveSpeed);
-          newDirection = '/assets/character_right.png';
-          break;
-        default:
-          return;
-      }
-
-      setPosition(newPosition);
-      setDirection(newDirection);
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [position, gameWidth, gameHeight]);
-
+const Character: React.FC<CharacterProps> = ({ position, direction, src }) => {
+  const imageSrc = src || directionToImage[direction];
   return (
-    <div
+    <img
+      src={imageSrc}
+      alt="캐릭터"
       style={{
         position: 'absolute',
         left: position.x,
         top: position.y,
-        width: `${CHARACTER_SIZE}px`,
-        height: `${CHARACTER_SIZE}px`,
-        backgroundImage: `url(${direction})`,
-        backgroundSize: 'contain',
-        backgroundRepeat: 'no-repeat',
-        transition: 'all 0.1s ease',
+        width: CHARACTER_WIDTH,
+        height: 'auto',
+        objectFit: 'contain',
+        imageRendering: 'pixelated',
+        transition: 'left 0.1s, top 0.1s',
+        zIndex: 10,
       }}
     />
   );

@@ -9,7 +9,7 @@ const GAME_HEIGHT = 512;
 const buildings = [
   { src: '/assets/school.png', alt: 'School', x: 100, y: 100, route: '/school-room' },
   { src: '/assets/hackers.png', alt: 'Hackers', x: 250, y: 100, route: '/hackers-room' },
-  { src: '/assets/alphaco.png', alt: 'Alphaco', x: 100, y: 250, route: '/academy-room' },
+  { src: '/assets/alphaco.png', alt: 'Alphaco', x: 100, y: 250, route: '/shinhan-room' },
   { src: '/assets/hk.png', alt: 'HK', x: 250, y: 250, route: '/hk-room' }
 ];
 
@@ -64,7 +64,7 @@ const Game = () => {
           <div>🏠 건물 접근 시 입장</div>
         </div>
         <div className="text-right">
-          <h1 className="text-2xl font-bold text-white font-pixel px-2 py-1 bg-black border-2 border-white">My Quest</h1>
+          <h1 className="text-2xl font-bold text-white font-pixel px-2 py-1 bg-black border-2 border-white">Yoon's RPG</h1>
           <p className="text-white font-pixel bg-black px-2 border-2 border-t-0 border-white text-xs">RPG 포트폴리오 탐험기</p>
         </div>
       </div>
