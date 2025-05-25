@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
 
 @layer base {
   :root {
@@ -97,5 +101,6 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Press Start 2P', sans-serif;
   }
 }

@@ -10,7 +10,7 @@ interface CharacterProps {
   gameHeight: number;
 }
 
-const CHARACTER_SIZE = 64;
+const CHARACTER_SIZE = 50;
 
 const Character: React.FC<CharacterProps> = ({ gameWidth, gameHeight }) => {
   const [position, setPosition] = useState<Position>({
