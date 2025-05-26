@@ -31,7 +31,7 @@ const HKRoom = () => {
   const roomObjects: RoomObjectData[] = [];
 
   // 캐릭터 이미지 경로 반환 함수
-  const getCharacterSrc = () => `/assets/character_${direction}.png`;
+  const getCharacterSrc = () => `/assets/character/character_${direction}.png`;
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -105,12 +105,12 @@ const HKRoom = () => {
       <div className="flex items-center justify-center w-full h-full">
         <div
           className="relative"
-          style={{ width: 512, height: 512 }}
+          style={{ width: 768, height: 512 }}
         >
           <img
-            src="/assets/background.png"
+            src="/assets/buildings/background.png"
             alt="room background"
-            style={{ width: 512, height: 512, objectFit: 'cover', imageRendering: 'pixelated' }}
+            style={{ width: 768, height: 512, objectFit: 'cover', imageRendering: 'pixelated' }}
           />
           {/* Room Objects */}
           {roomObjects.map(obj => (
@@ -126,6 +126,8 @@ const HKRoom = () => {
             direction={direction}
             isMoving={isMoving}
             src={getCharacterSrc()}
+            width={32}
+            height={48}
           />
         </div>
       </div>
