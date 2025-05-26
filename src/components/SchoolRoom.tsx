@@ -46,6 +46,9 @@ const SchoolRoom = () => {
           'MongoDB 데이터베이스 연동',
           'JWT 기반 인증 시스템 구현',
           'RESTful API 설계 및 개발'
+        ],
+        links: [
+          { text: '프로젝트 보기', url: 'https://github.com/gpdbs9409/Chehum-Moa-nodejs' }
         ]
       },
       image: '/assets/experience-logo/nodejs.png'
@@ -53,8 +56,8 @@ const SchoolRoom = () => {
     {
       id: 'flutter',
       name: 'Flutter',
-      position: { x: 100, y: 320 },
-      size: { width: 48, height: 48 },
+      position: { x: 120, y: 70 },
+      size: { width: 56, height: 48 },
       content: {
         title: 'Flutter 앱 개발',
         description: '크로스 플랫폼 모바일 앱 개발 경험',
@@ -63,6 +66,9 @@ const SchoolRoom = () => {
           '상태 관리 및 라우팅 구현',
           'Firebase 연동 및 실시간 데이터 처리',
           '반응형 디자인 및 애니메이션 구현'
+        ],
+        links: [
+          { text: '프로젝트 보기', url: 'https://github.com/gpdbs9409/Jachwi_in-App-Flutter-main-flutter' }
         ]
       },
       image: '/assets/experience-logo/flutter.png'
@@ -70,8 +76,8 @@ const SchoolRoom = () => {
     {
       id: 'ubuntu',
       name: 'Ubuntu',
-      position: { x: 200, y: 320 },
-      size: { width: 48, height: 48 },
+      position: { x: 300, y: 280 },
+      size: { width: 70, height: 48 },
       content: {
         title: 'Linux 시스템 관리',
         description: 'Ubuntu 서버 운영 및 관리 경험',
@@ -80,6 +86,9 @@ const SchoolRoom = () => {
           'Nginx 웹 서버 구성',
           'Docker 컨테이너 관리',
           '시스템 모니터링 및 보안 설정'
+        ],
+        links: [
+          { text: '프로젝트 보기', url: 'https://github.com/gpdbs9409/LetStudy' }
         ]
       },
       image: '/assets/experience-logo/ubuntu.png'
@@ -196,7 +205,7 @@ const SchoolRoom = () => {
       <div className="w-full px-4 pt-4 pb-2 flex justify-between items-start">
         <div className="bg-black bg-opacity-70 text-white border-2 border-white px-3 py-2 font-mono text-xs" style={{ imageRendering: 'pixelated' }}>
           <div>🎮 WASD 또는 화살표 키로 이동</div>
-          <div>🏠 건물 접근 시 입장</div>
+          <div>✔️ 로고클릭시 자세히 보기</div>
         </div>
         <div className="text-right">
           <img 

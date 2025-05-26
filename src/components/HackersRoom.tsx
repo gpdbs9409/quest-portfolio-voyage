@@ -121,7 +121,7 @@ const HackersRoom = () => {
       <div className="w-full px-4 pt-4 pb-2 flex justify-between items-start">
         <div className="bg-black bg-opacity-70 text-white border-2 border-white px-3 py-2 font-mono text-xs" style={{ imageRendering: 'pixelated' }}>
           <div>🎮 WASD 또는 화살표 키로 이동</div>
-          <div>🏠 건물 접근 시 입장</div>
+          <div>✔️ 로고클릭시 자세히 보기</div>
         </div>
         <div className="text-right">
           <img 

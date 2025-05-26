@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { X } from 'lucide-react';
 
@@ -11,6 +10,7 @@ interface RoomObjectData {
     title: string;
     description: string;
     links?: { text: string; url: string }[];
+    details?: string[];
   };
 }
 
@@ -51,63 +51,53 @@ const InfoModal = ({ object, onClose }: InfoModalProps) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
       <div 
-        className="bg-black text-white max-w-md w-full border-4 border-white transform animate-scale-in"
+        className="bg-black text-white p-6 rounded shadow-xl font-pixel w-[400px] border-4 border-white"
         style={{ imageRendering: 'pixelated' }}
       >
-        {/* Header */}
-        <div className="bg-gray-900 px-4 py-3 border-b-4 border-white flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8">
-              <img 
-                src={getObjectImage(object.id)} 
-                alt={object.name}
-                className="w-full h-full"
-              />
+        <h2 className="text-l font-bold mb-3 text-left border-b-2 border-white pb-2">
+          {object.content.title}
+        </h2>
+        
+        <p className="mb-4 text-xs text-left leading-relaxed">
+          {object.content.description}
+        </p>
+        
+        {object.content.details && object.content.details.length > 0 && (
+          <div className="mb-4 text-left">
+            <div className="text-xs space-y-1">
+              {object.content.details.map((detail, index) => (
+                <div key={index} className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>{detail}</span>
+                </div>
+              ))}
             </div>
-            <h2 className="text-xl font-bold text-white font-mono">
-              {object.content.title}
-            </h2>
           </div>
+        )}
+
+        {object.content.links && object.content.links.length > 0 && (
+          <div className="mt-4 text-left border-t-2 border-white pt-3">
+            {object.content.links.map((link, index) => (
+              <a
+                key={index}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-white hover:text-cyan-300 transition-colors text-sm"
+              >
+                🔗 {link.text}
+              </a>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-4 flex justify-center">
           <button
             onClick={onClose}
-            className="text-white hover:text-gray-300 transition-colors p-1"
+            className="px-4 py-1 bg-white text-black border-2 border-white hover:bg-black hover:text-white transition font-pixel text-xs"
           >
-            <X size={24} />
+            닫기
           </button>
-        </div>
-        
-        {/* Content */}
-        <div className="p-4">
-          <p className="text-white leading-relaxed mb-6 font-mono text-sm">
-            {object.content.description}
-          </p>
-          
-          {/* Links */}
-          {object.content.links && object.content.links.length > 0 && (
-            <div className="space-y-3">
-              <h3 className="font-semibold text-white font-mono text-sm border-b-2 border-gray-700 pb-1">
-                🔗 바로가기
-              </h3>
-              <div className="space-y-2">
-                {object.content.links.map((link, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleLinkClick(link.url)}
-                    className="w-full text-left bg-gray-900 hover:bg-gray-800 px-4 py-2 border-2 border-white font-mono text-sm text-white"
-                  >
-                    📄 {link.text}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-        
-        {/* Footer */}
-        <div className="bg-gray-900 px-4 py-2 border-t-2 border-white">
-          <p className="text-xs text-gray-400 font-mono text-center">
-            ESC 키 또는 X 버튼으로 닫기
-          </p>
         </div>
       </div>
     </div>

@@ -144,7 +144,7 @@ const ShinhanRoom = () => {
         {generateFloorTiles()}
         <div className="absolute top-4 left-4 bg-black bg-opacity-70 text-white p-3 rounded-none border-2 border-white font-mono text-xs" style={{imageRendering: 'pixelated'}}>
           <div>🎮 WASD 또는 화살표 키로 이동</div>
-          <div>🖱️ 오브젝트 클릭으로 상호작용</div>
+          <div>✔️ 로고클릭시 자세히 보기</div>
         </div>
         <div className="absolute top-4 right-4 text-right">
           <img 
