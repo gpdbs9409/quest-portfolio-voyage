@@ -10,19 +10,27 @@ interface CharacterProps {
   direction: 'up' | 'down' | 'left' | 'right';
   isMoving: boolean;
   src?: string;
+  width?: number;
+  height?: number;
 }
 
-const CHARACTER_WIDTH = 32;
-// const CHARACTER_HEIGHT = 48; // 높이 자동 비율 유지 위해 주석처리
+const DEFAULT_WIDTH = 48;
+const DEFAULT_HEIGHT = 64;
 
 const directionToImage: Record<string, string> = {
-  up: '/assets/character_up.png',
-  down: '/assets/character_down.png',
-  left: '/assets/character_left.png',
-  right: '/assets/character_right.png',
+  up: '/assets/character/character_up.png',
+  down: '/assets/character/character_down.png',
+  left: '/assets/character/character_left.png',
+  right: '/assets/character/character_right.png',
 };
 
-const Character: React.FC<CharacterProps> = ({ position, direction, src }) => {
+const Character: React.FC<CharacterProps> = ({ 
+  position, 
+  direction, 
+  src,
+  width = DEFAULT_WIDTH,
+  height = DEFAULT_HEIGHT 
+}) => {
   const imageSrc = src || directionToImage[direction];
   return (
     <img
@@ -32,8 +40,8 @@ const Character: React.FC<CharacterProps> = ({ position, direction, src }) => {
         position: 'absolute',
         left: position.x,
         top: position.y,
-        width: CHARACTER_WIDTH,
-        height: 'auto',
+        width: width,
+        height: height,
         objectFit: 'contain',
         imageRendering: 'pixelated',
         transition: 'left 0.1s, top 0.1s',

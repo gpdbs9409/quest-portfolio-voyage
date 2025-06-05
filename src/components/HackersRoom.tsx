@@ -31,7 +31,7 @@ const HackersRoom = () => {
   const roomObjects: RoomObjectData[] = [];
 
   // 캐릭터 이미지 경로 반환 함수
-  const getCharacterSrc = () => `/assets/character_${direction}.png`;
+  const getCharacterSrc = () => `/assets/character/character_${direction}.png`;
 
   useEffect(() => {
     const speed = 6;
@@ -86,12 +86,12 @@ const HackersRoom = () => {
       <div className="flex items-center justify-center w-full h-full">
         <div
           className="relative"
-          style={{ width: 512, height: 512 }}
+          style={{ width: 768, height: 512 }}
         >
           <img
-            src="/assets/background.png"
+            src="/assets/buildings/background.png"
             alt="room background"
-            style={{ width: 512, height: 512, objectFit: 'cover', imageRendering: 'pixelated' }}
+            style={{ width: 768, height: 512, objectFit: 'cover', imageRendering: 'pixelated' }}
           />
           {/* Room Objects */}
           {roomObjects.map(obj => (
@@ -107,6 +107,8 @@ const HackersRoom = () => {
             direction={direction}
             isMoving={isMoving}
             src={getCharacterSrc()}
+            width={48}
+            height={64}
           />
         </div>
       </div>
@@ -119,11 +121,18 @@ const HackersRoom = () => {
       <div className="w-full px-4 pt-4 pb-2 flex justify-between items-start">
         <div className="bg-black bg-opacity-70 text-white border-2 border-white px-3 py-2 font-mono text-xs" style={{ imageRendering: 'pixelated' }}>
           <div>🎮 WASD 또는 화살표 키로 이동</div>
-          <div>🏠 건물 접근 시 입장</div>
+          <div>✔️ 로고클릭시 자세히 보기</div>
         </div>
         <div className="text-right">
-          <h1 className="text-2xl font-bold text-white font-mono px-2 py-1 bg-black border-2 border-white">Hackers</h1>
-          <p className="text-white font-mono bg-black px-2 border-2 border-t-0 border-white text-s">서비스 기획 인턴</p>
+          <img 
+            src="/assets/building-logo/hackers.png" 
+            alt="Hackers Logo" 
+            style={{ 
+              width: '100px', 
+              imageRendering: 'pixelated',
+              backgroundColor: 'black'
+            }} 
+          />
         </div>
       </div>
       {/* 중앙 512x512 박스 */}

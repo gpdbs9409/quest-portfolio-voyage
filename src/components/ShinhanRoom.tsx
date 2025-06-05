@@ -31,7 +31,7 @@ const ShinhanRoom = () => {
   const roomObjects: RoomObjectData[] = [];
 
   // 캐릭터 이미지 경로 반환 함수
-  const getCharacterSrc = () => `/assets/character_${direction}.png`;
+  const getCharacterSrc = () => `/assets/character/character_${direction}.png`;
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -106,12 +106,12 @@ const ShinhanRoom = () => {
       <div className="flex items-center justify-center w-full h-full">
         <div
           className="relative"
-          style={{ width: 512, height: 512 }}
+          style={{ width: 768, height: 512 }}
         >
           <img
-            src="/assets/background.png"
+            src="/assets/buildings/background.png"
             alt="room background"
-            style={{ width: 512, height: 512, objectFit: 'cover', imageRendering: 'pixelated' }}
+            style={{ width: 768, height: 512, objectFit: 'cover', imageRendering: 'pixelated' }}
           />
           {/* Room Objects */}
           {roomObjects.map(obj => (
@@ -127,6 +127,8 @@ const ShinhanRoom = () => {
             direction={direction}
             isMoving={isMoving}
             src={getCharacterSrc()}
+            width={48}
+            height={64}
           />
         </div>
       </div>
@@ -142,11 +144,18 @@ const ShinhanRoom = () => {
         {generateFloorTiles()}
         <div className="absolute top-4 left-4 bg-black bg-opacity-70 text-white p-3 rounded-none border-2 border-white font-mono text-xs" style={{imageRendering: 'pixelated'}}>
           <div>🎮 WASD 또는 화살표 키로 이동</div>
-          <div>🖱️ 오브젝트 클릭으로 상호작용</div>
+          <div>✔️ 로고클릭시 자세히 보기</div>
         </div>
         <div className="absolute top-4 right-4 text-right">
-          <h1 className="text-2xl font-bold text-white font-mono px-2 py-1 bg-black border-2 border-white">Shinhan</h1>
-          <p className="text-white text-s font-mono bg-black px-2 border-2 border-t-0 border-white">프로 디지털 아카데미</p>
+          <img 
+            src="/assets/building-logo/shinhan.png" 
+            alt="Shinhan Logo" 
+            style={{ 
+              width: '100px', 
+              imageRendering: 'pixelated',
+              backgroundColor: 'black'
+            }} 
+          />
         </div>
       </div>
       {selectedObject && (

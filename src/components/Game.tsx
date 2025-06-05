@@ -2,17 +2,18 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Character from './Character';
+import React from 'react';
 
-const GAME_WIDTH = 512;
+const GAME_WIDTH = 768;
 const GAME_HEIGHT = 512;
 
 const buildings = [
-  { src: '/assets/school.png', alt: 'School', x: 100, y: 100, route: '/school-room' },
-  { src: '/assets/hackers.png', alt: 'Hackers', x: 250, y: 100, route: '/hackers-room' },
-  { src: '/assets/alphaco.png', alt: 'Alphaco', x: 100, y: 250, route: '/shinhan-room' },
-  { src: '/assets/hk.png', alt: 'HK', x: 250, y: 250, route: '/hk-room' }
+  { src: '/assets/buildings/school.png', alt: 'School', x: 100, y: 100, route: '/school-room', logo: '/assets/building-logo/seoultech.png' },
+  { src: '/assets/buildings/hackers.png', alt: 'Hackers', x: 500, y: 100, route: '/hackers-room', logo: '/assets/building-logo/hackers-logo.png' },
+  { src: '/assets/buildings/alphaco.png', alt: 'Alphaco', x: 100, y: 250, route: '/shinhan-room', logo: '/assets/building-logo/shinhan.png' },
+  { src: '/assets/buildings/hk.png', alt: 'HK', x: 400, y: 250, route: '/hk-room', logo: '/assets/building-logo/hk.png' }
 ];
-
+console.log(buildings);
 const Game = () => {
   const navigate = useNavigate();
   const [characterPos, setCharacterPos] = useState({ x: 200, y: 200 });
@@ -75,7 +76,7 @@ const Game = () => {
           style={{
             width: `${GAME_WIDTH}px`,
             height: `${GAME_HEIGHT}px`,
-            backgroundImage: 'url(/assets/background.png)',
+            backgroundImage: 'url(/assets/buildings/background.png)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             position: 'relative',
@@ -86,32 +87,57 @@ const Game = () => {
         >
           {/* 빌딩들 */}
           {buildings.map((building, index) => (
-            <img
-              key={index}
-              src={building.src}
-              alt={building.alt}
-              style={{
-                position: 'absolute',
-                top: building.y,
-                left: building.x,
-                width: '64px',
-                height: 'auto',
-              }}
-            />
+            <React.Fragment key={index}>
+              <img
+                src={building.src}
+                alt={building.alt}
+                style={{
+                  position: 'absolute',
+                  top: building.y,
+                  left: building.x,
+                  width: '100px',
+                  height: 'auto',
+                }}
+              />
+              {building.alt === 'HK' ? (
+                <div 
+                  style={{ 
+                    position: 'absolute', 
+                    top: building.y-10, 
+                    left: building.x + 25, 
+                    color: 'white',
+                    fontSize: '16px',
+                    fontWeight: 'bold',
+                    textShadow: '2px 2px 0 #000',
+                    zIndex: 20 
+                  }}
+                >
+                  HK
+                </div>
+              ) : (
+                <img 
+                  src={building.logo} 
+                  alt={`${building.alt} Logo`}
+                  style={{ 
+                    position: 'absolute', 
+                    top: building.y-10, 
+                    left: building.x + 25, 
+                    width: '50px', 
+                    height: 'auto',
+                    zIndex: 20 
+                  }} 
+                />
+              )}
+            </React.Fragment>
           ))}
 
           {/* 캐릭터 */}
-          <img
-            src="/assets/character_down.png"
-            alt="Character"
-            style={{
-              position: 'absolute',
-              top: characterPos.y,
-              left: characterPos.x,
-              width: '48px',
-              height: 'auto',
-              transition: 'top 0.1s, left 0.1s',
-            }}
+          <Character
+            position={characterPos}
+            direction="down"
+            isMoving={false}
+            width={48}
+            height={64}
           />
         </div>
       </div>

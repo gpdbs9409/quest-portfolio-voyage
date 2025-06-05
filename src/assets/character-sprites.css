@@ -1,0 +1,82 @@
+.character {
+  width: 32px;
+  height: 48px;
+  position: absolute;
+  transition: all 100ms ease-linear;
+  z-index: 20;
+  image-rendering: pixelated;
+}
+
+.character-sprite {
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Down animation */
+.character-sprite.down {
+  background-image: url('/assets/character-down.png');
+  animation: walkDown 0.4s steps(2) infinite;
+}
+
+/* Up animation */
+.character-sprite.up {
+  background-image: url('/assets/sprite2.png');
+  animation: walkUp 0.4s steps(2) infinite;
+}
+
+/* Left animation */
+.character-sprite.left {
+  background-image: url('/assets/sprite4.png');
+  animation: walkLeft 0.4s steps(2) infinite;
+}
+
+/* Right animation */
+.character-sprite.right {
+  background-image: url('/assets/sprite5.png');
+  animation: walkRight 0.4s steps(2) infinite;
+}
+
+/* Idle states */
+.character-sprite.down.idle {
+  background-position: 0 0;
+  animation: none;
+}
+
+.character-sprite.up.idle {
+  background-position: 0 0;
+  animation: none;
+}
+
+.character-sprite.left.idle {
+  background-position: 0 0;
+  animation: none;
+}
+
+.character-sprite.right.idle {
+  background-position: 0 0;
+  animation: none;
+}
+
+/* Animation keyframes */
+@keyframes walkDown {
+  from { background-position: 0 0; }
+  to { background-position: -64px 0; }
+}
+
+@keyframes walkUp {
+  from { background-position: 0 0; }
+  to { background-position: -64px 0; }
+}
+
+@keyframes walkLeft {
+  from { background-position: 0 0; }
+  to { background-position: -64px 0; }
+}
+
+@keyframes walkRight {
+  from { background-position: 0 0; }
+  to { background-position: -64px 0; }
+} 
